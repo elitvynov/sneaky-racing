@@ -4,8 +4,6 @@
 
 	using UnityStandardAssets.Cameras;
 
-	using litebox;
-
 	public class CameraController : AbstractTargetFollower
 	{
 		[SerializeField]
@@ -91,7 +89,7 @@
 			
 			//Debug.Log("currentVisible = " + currentVisible);
 			//Debug.Log("nextVisible = " + nextVisible);
-			Debug.Log("targetForward = " + targetForward);
+			//Debug.Log("targetForward = " + targetForward);
 
 			if (!currentVisible || !nextVisible)
 				_shift.y = Mathf.Clamp(_shift.y + 10.0f * deltaTime, _distanceMin, _distanceMax) + 2.5f;

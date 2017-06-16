@@ -30,7 +30,7 @@
 				pixelUV.x *= texture.width;
 				pixelUV.y *= texture.height;
 
-				Debug.Log("hit.textureCoord = " + hit.textureCoord + ", pixelUV = " + pixelUV);
+				//Debug.Log("hit.textureCoord = " + hit.textureCoord + ", pixelUV = " + pixelUV);
 
 				Color color = texture.GetPixel((int)pixelUV.x, (int)pixelUV.y);
 
@@ -46,7 +46,7 @@
 					}
 				}
 
-				Debug.Log("color = " + color + ", _type = " + _type);
+				//Debug.Log("color = " + color + ", _type = " + _type);
 			}
 		}
 

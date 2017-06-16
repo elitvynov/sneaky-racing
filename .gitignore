@@ -23,6 +23,9 @@ ExportedObj/
 *.svd
 *.pdb
 
+#Maya3d generated swatches
+*.mayaSwatches
+
 # Unity3D generated meta files
 *.pidb.meta
 

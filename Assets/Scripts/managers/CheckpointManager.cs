@@ -2,8 +2,6 @@
 {
 	using UnityEngine;
 
-	using litebox;
-
 	public class CheckpointManager : MonoBehaviour
 	{
 		private Checkpoint[] points;

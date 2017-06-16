@@ -1,11 +1,7 @@
-namespace litebox
+namespace sneakyRacing
 {
 	using UnityEngine;
 
-	/**
-	 * Additional figures for Gizmos.
-	 * @author Eugene Litvynov
-	 */
 	public class GizmosLite
 	{
 		public static Color color = Color.white;
