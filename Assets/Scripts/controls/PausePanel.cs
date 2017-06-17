@@ -8,6 +8,23 @@ namespace sneakyRacing
 		private Transform _buttonPanelTransform;
 		private Transform _pauseTransform;
 
+		public void replayButtonClick()
+		{
+			if (_inputInvalidator.invalidateEvent() == false)
+				return;
+
+			ScreenOverlay.instance.onCompleteEvent += onScreenFadeReplayComplete;
+			ScreenOverlay.instance.fadeIn(0.5f);
+		}
+
+		private void onScreenFadeReplayComplete()
+		{
+			ScreenOverlay.instance.onCompleteEvent -= onScreenFadeReplayComplete;
+
+			Scene currentScene = SceneManager.GetActiveScene();
+			SceneManager.LoadScene(currentScene.buildIndex);
+		}
+
 		public void quitButtonClick()
 		{
 			if (_inputInvalidator.invalidateEvent() == false)
@@ -15,17 +32,13 @@ namespace sneakyRacing
 
 			ScreenOverlay.instance.onCompleteEvent += onScreenFadeQuitComplete;
 			ScreenOverlay.instance.fadeIn(0.5f);
-
-			//SoundPlayer.instance.play("ButtonClick");
 		}
 
 		private void onScreenFadeQuitComplete()
 		{
 			ScreenOverlay.instance.onCompleteEvent -= onScreenFadeQuitComplete;
 
-			Scene currentScene = SceneManager.GetActiveScene();
-			//SceneManager.LoadScene("Menu");// currentScene.buildIndex);
-			SceneManager.LoadScene(currentScene.buildIndex);
+			SceneManager.LoadScene("Menu");
 		}
 
 		public void resumeButtonClick()
@@ -89,7 +102,7 @@ namespace sneakyRacing
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				Level.instance.pauseGame = true;
+				(Level.instance as TrackLevel).pauseGame = true;
 			}
 		}
 	}

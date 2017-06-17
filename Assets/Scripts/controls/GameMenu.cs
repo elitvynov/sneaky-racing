@@ -3,7 +3,7 @@ namespace sneakyRacing
 	using UnityEngine;
 	using UnityEngine.UI;
 
-	public class GameMenu : MonoBehaviour
+	public class GameMenu : Menu
 	{
 		private NotificationToast _notificationToast;
 

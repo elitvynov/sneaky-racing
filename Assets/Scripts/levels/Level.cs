@@ -1,11 +1,10 @@
 ﻿namespace sneakyRacing
 {
 	using UnityEngine;
-	using UnityEngine.SceneManagement;
 
 	public class Level : MonoBehaviour
 	{
-		protected static Level _instance = null;
+		private static Level _instance = null;
 
 		public static Level instance
 		{
@@ -18,35 +17,19 @@
 			}
 		}
 
-		public int coins
-		{
-			set
-			{
-				SettingManager.data.coins = value;
-			}
-		}
+		[SerializeField]
+		private Menu _menu;
 
-		public bool pauseGame
+		public Menu menu
 		{
 			get
 			{
-				return (Time.timeScale == 0.0f);
-			}
-			set
-			{
-				// pause game only before finish
-				//if (gameMenu.pausePanel.visible)
-				//	gameMenu.pausePanel.pause = value;
-
-				//AudioListener.pause = value;
+				return _menu;
 			}
 		}
 
-		private void Awake()
+		protected virtual void Awake()
 		{
-			FPSDisplay.DEBUG = true;
-			Stats.DEBUG = true;
-
 			if (_instance != null)
 				throw new UnityException("Level instance is already initialized.");
 
@@ -59,29 +42,30 @@
 			}
 		}
 
-		private void Start()
+		protected virtual void Start()
 		{
 			AudioListener.volume = 0.0f;
 			Application.targetFrameRate = 60;
 
 			Time.timeScale = 1.0f;  // in previous scene game could be paused
 
-			ScreenOverlay.instance.fadeOut(0.35f, 0.25f);
+			FPSDisplay.DEBUG = true;
+			Stats.DEBUG = true;
+
+			ScreenOverlay.instance.fadeOut(0.5f);
 		}
 
-		private void OnApplicationPause(bool pause)
+		protected virtual void OnApplicationPause(bool pause)
 		{
 			if (pause)
 			{
 				SettingManager.instance.flush();
-				//GameSaver.SaveGame ();
 			}
 		}
 
-		private void OnDestroy()
+		protected virtual void OnDestroy()
 		{
 			SettingManager.instance.flush();
-			//GameSaver.SaveGame ();
 		}
 	}
 }

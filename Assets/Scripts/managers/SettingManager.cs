@@ -1,8 +1,10 @@
 namespace sneakyRacing
 {
 	using UnityEngine;
-	
-	public class SettingManager : MonoBehaviour
+
+	using System.Collections.Generic;
+
+	public class SettingManager
 	{
 		private static SettingManager _instance = null;
 
@@ -17,9 +19,22 @@ namespace sneakyRacing
 			}
 		}
 
-		private SettingManager() {}
+		private SettingManager()
+		{
+			_tracks = DataManager.GetCompaings();
+		}
 
 		public bool isInitialized = false;
+
+		private List<Track> _tracks = new List<Track>();
+
+		public static List<Track> tracks
+		{
+			get
+			{
+				return _instance._tracks;
+			}
+		}
 
 		private SettingData _data = new SettingData();
 
