@@ -2,10 +2,8 @@ namespace sneakyRacing
 {
 	using UnityEngine;
 
-	/*
-	* Development from 24.01.2016
-	* @author Eugene Litvynov <litebox.dh@gmail.com>
-	*/
+	using UnityStandardAssets.Vehicles.Car;
+
 	public class TrackLevel : Level 
 	{
 		
@@ -18,16 +16,13 @@ namespace sneakyRacing
 			}
 		}
 
-		private GameMenu _gameMenu;
+		private CarController _player;
 		
-		public GameMenu gameMenu
+		public CarController player
 		{
 			get
 			{
-				if (_gameMenu == null)
-					_gameMenu = transform.Find("GameMenu").GetComponent<GameMenu>();
-				
-				return _gameMenu;
+				return _player;
 			}
 		}
 		
@@ -40,23 +35,30 @@ namespace sneakyRacing
 			set 
 			{
 				// pause game only before finish
-				if (gameMenu.pausePanel.visible)
-					gameMenu.pausePanel.pause = value;
+				if ((menu as GameMenu).pausePanel.visible)
+					(menu as GameMenu).pausePanel.pause = value;
 
 				//AudioListener.pause = value;
 			}
 		}
 
-		public void finish()
+		public void gameOver()
 		{
-			gameMenu.pausePanel.visible = false;
+			Debug.LogWarning("gameOver()");
+
+			//(menu as GameMenu).pausePanel.visible = false;
+
+			GhostRecorder ghostRecorder = _player.transform.GetComponentInChildren<GhostRecorder>();
+			ghostRecorder.stop();
+
+			SettingManager.instance.completeTrack(0);
 		}
 
 		protected override void Awake()
 		{
 			base.Awake();
 
-			
+			_player = transform.Find("Car").GetComponent<CarController>();
 		}
 
 		protected override void OnApplicationPause(bool pause)

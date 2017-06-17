@@ -61,7 +61,7 @@
 				}
 				else
 				{
-					Debug.LogWarning("Game Over");
+					(Level.instance as TrackLevel).gameOver();
 				}
 			}
 		}

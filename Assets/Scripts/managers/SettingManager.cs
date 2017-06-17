@@ -50,7 +50,23 @@ namespace sneakyRacing
 		{
 			_data = new SettingData();
 		}
-		
+
+		public void completeTrack(int stars)
+		{
+			// level replay
+			if (_data.currentTrack < _data.stars.Count)
+			{
+				// update only if current result is better than old one
+				if (_data.stars[_data.currentTrack] < stars)
+					_data.stars[_data.currentTrack] = stars;
+			}
+			// saved data doesn't contain current level
+			else
+			{
+				_data.stars.Add(stars);
+			}
+		}
+
 		/// <summary>
 		/// Checks if it's time to charge battery.
 		/// </summary>
@@ -97,19 +113,6 @@ namespace sneakyRacing
 	[System.Serializable]
 	public class SettingData
 	{
-		public enum TutorialSlide
-		{
-			VehiclePurchase,
-			RaceStart,
-			InputPractise,
-			NitroPractise,
-			CrashPractise,
-			RepairPractise,
-			BoosterPractise,
-			RaceFinish,
-			VehicleUpgrade,
-		};
-		
 		// settings' data
 		public string locale = "_en-en";
 		public bool gameRated = false;
@@ -119,17 +122,15 @@ namespace sneakyRacing
 
 		// player's data
 		public int coins = 0;
+		public int currentTrack = 0;
 
-		// player's statistical data
-		public int coinsOverall = 0;			// how many coins was earned / bought (from install)
-		public int beadsOverall = 0;			// how many beads was earned / bought (from install)
-		public int gameSessionOverall = 0;      // how many game sessions was played (from install)
-		public int gameSessionCount = 0;        // how many game sessions was played (from launch)
-		
-		// tutorial's data
-		//public bool[] tutorialSlides = new bool[TutorialSlideCount];
-		public bool tutorialVehiclePurchase = false;
-		public bool tutorialVehicleUpgrade = false;
-		public bool tutorialRaceFinish = false;
+		public List<int> stars = new List<int>();
 	}
+	/*
+	[System.Serializable]
+	public class TrackData
+	{
+		public int starCount = 0;
+	}
+	*/
 }

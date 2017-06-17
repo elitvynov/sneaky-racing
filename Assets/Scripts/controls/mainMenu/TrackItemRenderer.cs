@@ -3,7 +3,7 @@ namespace sneakyRacing
 	using UnityEngine;
 	using UnityEngine.UI;
 
-	public class CompetitorItemRenderer : MonoBehaviour 
+	public class TrackItemRenderer : MonoBehaviour 
 	{
 		private RawImage _iconRawImage;
 

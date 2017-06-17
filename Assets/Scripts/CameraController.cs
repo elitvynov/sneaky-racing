@@ -32,53 +32,6 @@
 			Vector3 targetForward = m_Target.forward;
 			//Vector3 targetUp = m_Target.up;
 
-			//if (m_FollowVelocity && Application.isPlaying)
-			{
-				// in follow velocity mode, the camera's rotation is aligned towards the object's velocity direction
-				// but only if the object is traveling faster than a given threshold.
-
-				//if (targetRigidbody.velocity.magnitude > m_TargetVelocityLowerLimit)
-				{
-					// velocity is high enough, so we'll use the target's velocty
-					//targetForward = targetRigidbody.velocity.normalized;
-					//targetUp = Vector3.up;
-				}
-
-				//m_CurrentTurnAmount = Mathf.SmoothDamp(m_CurrentTurnAmount, 1, ref m_TurnSpeedVelocityChange, m_SmoothTurnTime);
-			}
-			/*
-			else
-			{
-				// we're in 'follow rotation' mode, where the camera rig's rotation follows the object's rotation.
-
-				// This section allows the camera to stop following the target's rotation when the target is spinning too fast.
-				// eg when a car has been knocked into a spin. The camera will resume following the rotation
-				// of the target when the target's angular velocity slows below the threshold.
-				var currentFlatAngle = Mathf.Atan2(targetForward.x, targetForward.z) * Mathf.Rad2Deg;
-				if (m_SpinTurnLimit > 0)
-				{
-					var targetSpinSpeed = Mathf.Abs(Mathf.DeltaAngle(m_LastFlatAngle, currentFlatAngle)) / deltaTime;
-					var desiredTurnAmount = Mathf.InverseLerp(m_SpinTurnLimit, m_SpinTurnLimit * 0.75f, targetSpinSpeed);
-					var turnReactSpeed = (m_CurrentTurnAmount > desiredTurnAmount ? .1f : 1f);
-					if (Application.isPlaying)
-					{
-						m_CurrentTurnAmount = Mathf.SmoothDamp(m_CurrentTurnAmount, desiredTurnAmount,
-															 ref m_TurnSpeedVelocityChange, turnReactSpeed);
-					}
-					else
-					{
-						// for editor mode, smoothdamp won't work because it uses deltaTime internally
-						m_CurrentTurnAmount = desiredTurnAmount;
-					}
-				}
-				else
-				{
-					m_CurrentTurnAmount = 1;
-				}
-				m_LastFlatAngle = currentFlatAngle;
-			}
-			*/
-
 			//Vector3[] positions = new Vector3[] { m_Target.position, _checkpoints.getCurrentPoint(), _checkpoints.getNextPoint() };
 			//Bounds bounds = GeometryUtility.CalculateBounds(positions, Matrix4x4.identity);
 
@@ -99,23 +52,13 @@
 			// camera position moves towards target position:
 			//transform.position = Vector3.Lerp(transform.position, bounds.center + _shift, deltaTime * m_MoveSpeed);
 			transform.position = Vector3.Lerp(transform.position, (m_Target.position + targetForward * 16.0f) + _shift, deltaTime * _moveSpeed);
-			/*
-			// camera's rotation is split into two parts, which can have independend speed settings:
-			// rotating towards the target's forward direction (which encompasses its 'yaw' and 'pitch')
-			if (!m_FollowTilt)
-			{
-				targetForward.y = 0;
-				if (targetForward.sqrMagnitude < float.Epsilon)
-				{
-					targetForward = transform.forward;
-				}
-			}
-			var rollRotation = Quaternion.LookRotation(targetForward, m_RollUp);
+		}
 
-			// and aligning with the target object's up direction (i.e. its 'roll')
-			m_RollUp = m_RollSpeed > 0 ? Vector3.Slerp(m_RollUp, targetUp, m_RollSpeed * deltaTime) : Vector3.up;
-			transform.rotation = Quaternion.Lerp(transform.rotation, rollRotation, m_TurnSpeed * m_CurrentTurnAmount * deltaTime);
-			*/
+		protected override void Start()
+		{
+			base.Start();
+
+			FollowTarget(1.0f);
 		}
 
 		private void OnDrawGizmos()

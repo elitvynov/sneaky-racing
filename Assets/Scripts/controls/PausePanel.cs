@@ -13,6 +13,8 @@ namespace sneakyRacing
 			if (_inputInvalidator.invalidateEvent() == false)
 				return;
 
+			(Level.instance as TrackLevel).gameOver();
+
 			ScreenOverlay.instance.onCompleteEvent += onScreenFadeReplayComplete;
 			ScreenOverlay.instance.fadeIn(0.5f);
 		}

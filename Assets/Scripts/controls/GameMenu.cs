@@ -44,11 +44,6 @@ namespace sneakyRacing
 				return _instrumentPanel;
 			}
 		}
-		
-		public void nextWave(int waveIndex)
-		{
-			notificationToast.show("Wave " + (waveIndex + 1));
-		}
 
 		private void onGameOver()
 		{

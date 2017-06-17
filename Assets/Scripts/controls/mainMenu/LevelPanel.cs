@@ -11,7 +11,7 @@ namespace sneakyRacing
 		private Transform _competitorPanelTransform;
 		private Transform _competitorContentTransform;
 
-		private CompetitorItemRenderer[] _winnerItemRenderers;
+		private TrackItemRenderer[] _winnerItemRenderers;
 
 		private Transform _inviteItemRenderer;
 		private Transform _itemRendererPrefab;
@@ -58,7 +58,7 @@ namespace sneakyRacing
 				itemRendererObject.transform.SetParent(_competitorContentTransform, false);
 				itemRendererObject.SetActive(true);
 
-				CompetitorItemRenderer itemRenderer = itemRendererObject.GetComponent<CompetitorItemRenderer>();
+				TrackItemRenderer itemRenderer = itemRendererObject.GetComponent<TrackItemRenderer>();
 
 				Track user = userList[i];
 
@@ -83,11 +83,11 @@ namespace sneakyRacing
 		
 		private void clearCompetitors()
 		{
-			CompetitorItemRenderer[] competitorItemRenderers = _competitorContentTransform.GetComponentsInChildren<CompetitorItemRenderer>();
+			TrackItemRenderer[] competitorItemRenderers = _competitorContentTransform.GetComponentsInChildren<TrackItemRenderer>();
 
 			for (int i = 0; i < competitorItemRenderers.Length; i++)
 			{
-				CompetitorItemRenderer itemRenderer = competitorItemRenderers[i];
+				TrackItemRenderer itemRenderer = competitorItemRenderers[i];
 
 				if (itemRenderer.transform != _itemRendererPrefab)
 				{
