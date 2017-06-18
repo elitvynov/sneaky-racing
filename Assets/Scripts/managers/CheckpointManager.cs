@@ -2,6 +2,8 @@
 {
 	using UnityEngine;
 
+	using UnityStandardAssets.Vehicles.Car;
+
 	public class CheckpointManager : MonoBehaviour
 	{
 		private Checkpoint[] points;
@@ -90,7 +92,13 @@
 				points[i].index = i;
 			}
 
-			_currentPoint = 0;
+			Checkpoint startPoint = points[0];
+			startPoint.isStart = true;
+
+			CarController player = (Level.instance as TrackLevel).player;
+			player.transform.position = startPoint.transform.position + Vector3.up;
+
+			_currentPoint = 1;
 		}
 
 		private void Start()
@@ -115,7 +123,7 @@
 			for (int i = 0; i < points.Length; i++)
 			{
 				if (i == 0)
-					Gizmos.DrawSphere(points[i].transform.position, 2);
+					Gizmos.DrawSphere(points[i].transform.position, 4);
 				else
 					Gizmos.DrawSphere(points[i].transform.position, 1);
 

@@ -11,9 +11,6 @@
 
 		private Collider _collider;
 
-		[SerializeField]
-		private Color color = Color.blue;
-
 		private float _angle = 5.0f;
 
 		public int index { get; set; }
@@ -33,6 +30,17 @@
 			_borderTransform = transform.Find("Border");
 
 			_collider = GetComponent<Collider>();
+		}
+
+		public bool isStart
+		{
+			set
+			{
+				_pointTransform.gameObject.SetActive(!value);
+				_borderTransform.gameObject.SetActive(!value);
+
+				_collider.enabled = !value;
+			}
 		}
 
 		private void OnTriggerEnter(Collider collider)
