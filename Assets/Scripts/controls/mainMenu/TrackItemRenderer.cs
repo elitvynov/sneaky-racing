@@ -11,9 +11,7 @@ namespace sneakyRacing
 		{
 			set
 			{
-				Texture im = Resources.Load<Texture>("Gui/Tracks/" + value);
-
-				_iconRawImage.texture = im;
+				_iconRawImage.texture = Resources.Load<Texture>("Gui/Tracks/" + value);
 			}
 		}
 
@@ -26,7 +24,30 @@ namespace sneakyRacing
 				_trackText.text = value;
 			}
 		}
-		
+
+		public int stars
+		{
+			set
+			{
+				Transform starsTransform = transform.Find("Stars");
+
+				if (value > 0)
+				{
+					Star[] stars = starsTransform.GetComponentsInChildren<Star>();
+
+					for (int i = 0; i < stars.Length; i++)
+					{
+						Star star = stars[i];
+						star.isActive = (i < value);
+					}
+				}
+				else
+				{
+					starsTransform.gameObject.SetActive(false);
+				}
+			}
+		}
+
 		private void Awake()
 		{
 			_iconRawImage = transform.Find("Icon").GetComponent<RawImage>();

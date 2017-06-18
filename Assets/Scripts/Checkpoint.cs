@@ -14,6 +14,8 @@
 		[SerializeField]
 		private Color color = Color.blue;
 
+		private float _angle = 5.0f;
+
 		public int index { get; set; }
 
 		public void hide()
@@ -21,6 +23,8 @@
 			_pointTransform.gameObject.SetActive(false);
 
 			_collider.enabled = false;
+
+			_angle = 4.95f;
 		}
 
 		private void Awake()
@@ -44,8 +48,13 @@
 
 		private void Update()
 		{
-			_pointTransform.Rotate(Vector3.forward, 5.0f);
-			_borderTransform.Rotate(Vector3.left, -5.0f);
+			if (_angle < 5.0f)
+			{
+				_angle = Mathf.Clamp(_angle - 5.0f * Time.deltaTime, 0.0f, 5.0f);
+			}
+
+			_pointTransform.Rotate(Vector3.forward, _angle);
+			_borderTransform.Rotate(Vector3.left, -_angle);
 		}
 	}
 }

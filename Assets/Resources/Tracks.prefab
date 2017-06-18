@@ -55,16 +55,12 @@ MonoBehaviour:
   - name: Tutorial
     sceneName: Track_1
     iconName: track_icon_1
-    cashPrize: 5
   - name: Track 1
-    sceneName: Track_1
+    sceneName: Track_2
     iconName: track_icon_1
-    cashPrize: 10
   - name: Track 2
-    sceneName: Track_1
+    sceneName: Track_3
     iconName: track_icon_1
-    cashPrize: 10
   - name: Track 3
-    sceneName: Track_1
+    sceneName: Track_4
     iconName: track_icon_1
-    cashPrize: 15

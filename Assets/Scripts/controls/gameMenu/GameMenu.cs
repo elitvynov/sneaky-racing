@@ -1,7 +1,6 @@
 namespace sneakyRacing
 {
 	using UnityEngine;
-	using UnityEngine.UI;
 
 	public class GameMenu : Menu
 	{
@@ -43,11 +42,6 @@ namespace sneakyRacing
 			{
 				return _instrumentPanel;
 			}
-		}
-
-		private void onGameOver()
-		{
-			_gameOverPanel.show();
 		}
 
 		private void Awake()

@@ -22,6 +22,6 @@
 		public string sceneName;
 		public string iconName;
 
-		public int cashPrize;
+		//public int cashPrize;
 	}
 }

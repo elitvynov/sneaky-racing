@@ -6,13 +6,15 @@
 	{
 		private Checkpoint[] points;
 
+		public int getRestCount()
+		{
+			return points.Length - _currentPoint;
+		}
+
 		private int _currentPoint;
 
 		[SerializeField]
 		private Color color = Color.blue;
-
-		[SerializeField]
-		private bool _nameCorrection = true;
 
 		public Transform getCurrentTransform()
 		{
@@ -57,12 +59,24 @@
 				{
 					_currentPoint++;
 
+					(Level.instance.menu as GameMenu).instrumentPanel.checkpoints = getRestCount();
+
 					Debug.LogWarning("Next checkpoint: " + _currentPoint);
 				}
 				else
 				{
 					(Level.instance as TrackLevel).gameOver();
 				}
+			}
+		}
+
+		public void correctNames()
+		{
+			points = transform.GetComponentsInChildren<Checkpoint>();
+
+			for (int i = 0; i < points.Length; i++)
+			{
+				points[i].gameObject.name = "Point_" + i;
 			}
 		}
 
@@ -77,6 +91,11 @@
 			}
 
 			_currentPoint = 0;
+		}
+
+		private void Start()
+		{
+			(Level.instance.menu as GameMenu).instrumentPanel.checkpoints = getRestCount();
 		}
 
 		private void OnDrawGizmos()
@@ -95,11 +114,6 @@
 
 			for (int i = 0; i < points.Length; i++)
 			{
-				if (_nameCorrection)
-					points[i].gameObject.name = "Waypoint_" + i;
-
-				//_lerpColor = Color.Lerp(startColor, endColor, ((float)i /points.Length));
-
 				if (i == 0)
 					Gizmos.DrawSphere(points[i].transform.position, 2);
 				else

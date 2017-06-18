@@ -48,23 +48,54 @@ namespace sneakyRacing
 
 		public void resetData()
 		{
+			Debug.Log("Game data is reset to defaults.");
+
 			_data = new SettingData();
+
+			isInitialized = true;
 		}
 
-		public void completeTrack(int stars)
+		public void completeTrack(int stars, float time)
 		{
+			Debug.Log("completeTrack(): stars=" + stars + ", time=" + time);
+			Debug.Log("_data.currentTrack=" + _data.currentTrack);
+
 			// level replay
-			if (_data.currentTrack < _data.stars.Count)
+			if (_data.currentTrack < _data.trackList.Count)
 			{
+				TrackData trackData = _data.trackList[_data.currentTrack];
+
+				Debug.Log("trackData.starCount: " + trackData.starCount);
+
 				// update only if current result is better than old one
-				if (_data.stars[_data.currentTrack] < stars)
-					_data.stars[_data.currentTrack] = stars;
+				if (trackData.starCount < stars)
+					trackData.starCount = stars;
+
+				if (trackData.bestTime == 0.0f || trackData.bestTime > time)
+					trackData.bestTime = time;
+
+				Debug.Log("trackData.starCount: " + trackData.starCount);
 			}
 			// saved data doesn't contain current level
 			else
 			{
-				_data.stars.Add(stars);
+				TrackData trackData = new TrackData(stars, time);
+
+				Debug.Log("save new data: " + stars);
+
+				_data.trackList.Add(trackData);
 			}
+		}
+
+		public void setReplay(List<Dictionary<string, ObjectState>> objectStateList, float time)
+		{
+			TrackData trackData = _data.trackList[_data.currentTrack];
+
+			Debug.LogWarning("trackData.bestTime = " + trackData.bestTime);
+			Debug.LogWarning("time = " + time);
+
+			if (trackData.bestTime == 0.0f || trackData.bestTime > time)
+				trackData.objectStateList = objectStateList;
 		}
 
 		/// <summary>
@@ -76,6 +107,8 @@ namespace sneakyRacing
 				return;
 
 			string data = JsonUtility.ToJson(_data);
+
+			Debug.Log("flush(): " + data);
 
 			PlayerPrefs.SetString("data", data);
 		}
@@ -105,6 +138,8 @@ namespace sneakyRacing
 			{
 				string data = PlayerPrefs.GetString("data");
 
+				Debug.Log("restore(): " + data);
+
 				_data = JsonUtility.FromJson<SettingData>(data);
 			}
 		}
@@ -123,14 +158,35 @@ namespace sneakyRacing
 		// player's data
 		public int coins = 0;
 		public int currentTrack = 0;
+		//public int availableTrack = 0;
 
-		public List<int> stars = new List<int>();
+		// by default, we have 1 opened track
+		public List<TrackData> trackList = new List<TrackData>(new TrackData[] { new TrackData() });
 	}
-	/*
+	
 	[System.Serializable]
 	public class TrackData
 	{
 		public int starCount = 0;
+		public float bestTime = 0.0f;
+
+		public bool isPlayed
+		{
+			get
+			{
+				return (bestTime > 0.0f);
+			}
+		}
+
+		[System.NonSerialized]
+		public List<Dictionary<string, ObjectState>> objectStateList;
+
+		public TrackData() { }
+
+		public TrackData(int starCount, float bestTime)
+		{
+			this.starCount = starCount;
+			this.bestTime = bestTime;
+		}
 	}
-	*/
 }

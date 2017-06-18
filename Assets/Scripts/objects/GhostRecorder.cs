@@ -5,26 +5,18 @@ namespace sneakyRacing
 
 	public class GhostRecorder : MonoBehaviour
 	{
+		public const float frequency = 0.25f;
+
 		private List<Dictionary<string, ObjectState>> _objectStateList;
 
 		private float _recordFrameTime = 0.0f;
 		private bool _isRecording = false;
 		
-		//private float _lerp;
-		/*
-		public float frame
+		public List<Dictionary<string, ObjectState>> getReplay()
 		{
-			set
-			{
-				int count = _objectStateList.Count - 1;
-				float index = (float)count * value;
-
-				//Console.trace("value=" + value + ", index=" + Mathf.RoundToInt(index) + ", Count=" + _objectStateList.Count);
-
-				restoreState(Mathf.RoundToInt(index));
-			}
+			return _objectStateList;
 		}
-		*/
+		
 		public void record()
 		{
 			Debug.Log("Time.fixedDeltaTime = " + Time.fixedDeltaTime);
@@ -70,8 +62,6 @@ namespace sneakyRacing
 		public void stop()
 		{
 			//disablePhysics();
-
-			GhostPlayer.setReplay(SettingManager.data.currentTrack, _objectStateList);
 
 			_isRecording = false;
 		}
@@ -121,16 +111,14 @@ namespace sneakyRacing
 			record();
 		}
 
-		private void Update()
+		private void FixedUpdate()
 		{
-			
-
 			if (_isRecording)
 			{
 				//if (_lerp == 1.0f)
 				//	return;
 
-				if (_recordFrameTime > 0.25f)
+				if (_recordFrameTime > frequency)
 				{
 					saveCurrentState();
 

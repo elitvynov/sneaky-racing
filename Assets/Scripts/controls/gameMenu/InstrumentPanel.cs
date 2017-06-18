@@ -15,13 +15,13 @@ namespace sneakyRacing
 			}
 		}
 
-		private Text _scoreText;
+		private Text _checkpointText;
 
-		public int score
+		public int checkpoints
 		{
 			set
 			{
-				_scoreText.text = value.ToString();
+				_checkpointText.text = value.ToString();
 			}
 		}
 
@@ -31,17 +31,7 @@ namespace sneakyRacing
 		{
 			set
 			{
-				_timeText.text = value.ToString();
-			}
-		}
-
-		private Text _coinsText;
-
-		public int coins
-		{
-			set
-			{
-				_coinsText.text = value.ToString();
+				_timeText.text = value.ToString("0.00");
 			}
 		}
 
@@ -49,8 +39,7 @@ namespace sneakyRacing
 		{
 			_pauseTransform = transform.Find("PauseButton");
 
-			_coinsText = transform.Find("Coins/Text").GetComponent<Text>();
-			_scoreText = transform.Find("Score/Text").GetComponent<Text>();
+			_checkpointText = transform.Find("Checkpoints/Text").GetComponent<Text>();
 			_timeText = transform.Find("Time/Text").GetComponent<Text>();
 		}
 
