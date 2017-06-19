@@ -14,7 +14,7 @@ namespace UnityStandardAssets.Vehicles.Car
             // get the car controller
             m_Car = GetComponent<CarController>();
 
-			gameObject.SetActive(Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer);
+			enabled = (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer);
 		}
 
         private void FixedUpdate()
