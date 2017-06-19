@@ -22,7 +22,7 @@
 		[SerializeField]
 		private WheelEffects _rightWheel;
 
-		private readonly float[] _tractionSurfaces = new float[3] { 0.05f, 0.5f, 1.0f };
+		private readonly float[] _tractionSurfaces = new float[3] { 0.25f, 0.65f, 0.95f };
 
 		private ParticleSystem[] _leftSurfaces = new ParticleSystem[3];
 		private ParticleSystem[] _rightSurfaces = new ParticleSystem[3];
@@ -77,7 +77,7 @@
 					{
 						_type = (SurfaceType)i;
 
-						Debug.Log("_type = " + _type);
+						//Debug.Log("_type = " + _type);
 
 						if (_leftWheel.skidParticles != _leftSurfaces[i])
 						{
