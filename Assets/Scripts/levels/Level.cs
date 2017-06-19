@@ -49,9 +49,6 @@
 
 			Time.timeScale = 1.0f;  // in previous scene game could be paused
 
-			FPSDisplay.DEBUG = true;
-			Stats.DEBUG = true;
-
 			ScreenOverlay.instance.fadeOut(0.5f);
 		}
 
