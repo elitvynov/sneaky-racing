@@ -1051,6 +1051,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 218479450301367188, guid: 323c6bf4a4c9f5546a7cc4dfe6b717b6,
+        type: 2}
+      propertyPath: m_DetailObjectDistance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 218479450301367188, guid: 323c6bf4a4c9f5546a7cc4dfe6b717b6,
+        type: 2}
+      propertyPath: m_DetailObjectDensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 218479450301367188, guid: 323c6bf4a4c9f5546a7cc4dfe6b717b6,
+        type: 2}
+      propertyPath: m_TreeDistance
+      value: 2000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 323c6bf4a4c9f5546a7cc4dfe6b717b6, type: 2}
   m_IsPrefabParent: 0
@@ -6546,6 +6561,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114662163394984014, guid: fb80e59f99e941741b1d48139f63156f,
+        type: 2}
+      propertyPath: _car
+      value: 
+      objectReference: {fileID: 1411629115}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb80e59f99e941741b1d48139f63156f, type: 2}
   m_IsPrefabParent: 0

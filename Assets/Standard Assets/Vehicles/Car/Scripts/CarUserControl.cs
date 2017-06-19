@@ -28,7 +28,7 @@ namespace UnityStandardAssets.Vehicles.Car
 			else
 				_supressSteering = Mathf.Clamp(_supressSteering - 2.0f * Time.deltaTime, 0.0f, 0.5f);
 
-			Debug.Log("h = " + h + ", _supressSteering = " + _supressSteering);
+			//Debug.Log("h = " + h + ", _supressSteering = " + _supressSteering);
 
 			//#if !MOBILE_INPUT
 			float handbrake = CrossPlatformInputManager.GetAxis("Jump");

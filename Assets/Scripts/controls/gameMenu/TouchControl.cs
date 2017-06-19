@@ -27,6 +27,8 @@ namespace sneakyRacing
 		{
 			//if (Input.touchCount > 0)
 			{
+				Debug.Log("Input.touchCount = " + Input.touchCount);
+
 				for (int i = 0; i < Input.touches.Length; i++)
 				{
 					Vector2 touchPosition = Input.touches[i].position;
