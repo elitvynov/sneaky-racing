@@ -72,10 +72,12 @@ namespace sneakyRacing
 			}
 		}*/
 
-		private float _input = 0.0f;
+		private float _steering = 0.0f;
 
 		private void Update()
 		{
+			float horizontalInput = 0.0f;
+
 			for (int i = 0; i < Input.touches.Length; i++)
 			{
 				Vector2 touchPosition = Input.touches[i].position;
@@ -84,7 +86,7 @@ namespace sneakyRacing
 				{
 					//Debug.Log("LEFT");
 
-					_input = Mathf.Clamp(_input - 4.0f * Time.deltaTime, -1, 0);
+					horizontalInput = -1.0f;
 
 					//_car.Move(-1.0f, 1.0f, 0.0f, 0.0f);
 				}
@@ -93,17 +95,17 @@ namespace sneakyRacing
 				{
 					//Debug.Log("RIGHT");
 
-					_input = Mathf.Clamp(_input + 4.0f * Time.deltaTime, 0, 1);
+					horizontalInput = 1.0f;
 
 					//_car.Move(1.0f, 1.0f, 0.0f, 0.0f);
 				}
 			}
 
-			_input *= (5.0f * Time.deltaTime);
+			_steering = Mathf.Lerp(_steering, horizontalInput, 5.0f * Time.deltaTime);
 
-			Debug.Log("_input = " + _input);
+			Debug.Log("h = " + horizontalInput + ", _steering = " + _steering);
 
-			_car.Move(_input, 1.0f, 0.0f, 0.0f);
+			_car.Move(_steering, 1.0f, 0.0f, 0.0f);
 		}
 	}
 }
