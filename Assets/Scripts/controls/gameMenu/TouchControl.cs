@@ -2,6 +2,7 @@ namespace sneakyRacing
 {
 	using UnityEngine;
 
+	using UnityStandardAssets.CrossPlatformInput;
 	using UnityStandardAssets.Vehicles.Car;
 
 	public class TouchControl : MonoBehaviour 
@@ -11,6 +12,8 @@ namespace sneakyRacing
 
 		private RectTransform _left;
 		private RectTransform _right;
+
+		private CrossPlatformInputManager.VirtualAxis m_HorizontalVirtualAxis;
 
 		private void Awake()
 		{
@@ -23,6 +26,51 @@ namespace sneakyRacing
 			gameObject.SetActive(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer);
 		}
 
+		private void OnEnable()
+		{
+			m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis("Horizontal");
+			CrossPlatformInputManager.RegisterVirtualAxis(m_HorizontalVirtualAxis);
+		}
+
+		private void OnDisable()
+		{
+			if (CrossPlatformInputManager.AxisExists("Horizontal"))
+				CrossPlatformInputManager.UnRegisterVirtualAxis("Horizontal");
+		}
+
+		private void UpdateVirtualAxes(Vector3 value)
+		{
+			value = value.normalized;
+
+			m_HorizontalVirtualAxis.Update(value.x);
+		}
+
+		private void Update()
+		{
+			Debug.Log("Input.touchCount = " + Input.touchCount);
+
+			for (int i = 0; i < Input.touches.Length; i++)
+			{
+				Vector2 touchPosition = Input.touches[i].position;
+
+				if (RectTransformUtility.RectangleContainsScreenPoint(_left, touchPosition))
+				{
+					Debug.Log("LEFT");
+
+					UpdateVirtualAxes(new Vector3(-1, 0, 0));
+					//_car.Move(-1.0f, 1.0f, 0.0f, 0.0f);
+				}
+
+				if (RectTransformUtility.RectangleContainsScreenPoint(_right, touchPosition))
+				{
+					Debug.Log("RIGHT");
+
+					UpdateVirtualAxes(new Vector3(1, 0, 0));
+					//_car.Move(1.0f, 1.0f, 0.0f, 0.0f);
+				}
+			}
+		}
+		/*
 		private void FixedUpdate()
 		{
 			//if (Input.touchCount > 0)
@@ -49,5 +97,6 @@ namespace sneakyRacing
 				}
 			}
 		}
+		*/
 	}
 }
