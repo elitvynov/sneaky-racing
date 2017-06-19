@@ -21,7 +21,7 @@ namespace sneakyRacing
 		
 		public virtual void show()
 		{
-			Debug.Log("Panel:show()");
+			//Debug.Log("Panel:show()");
 
 			if (gameObject.activeSelf == false)
 				gameObject.SetActive(true);
@@ -31,7 +31,7 @@ namespace sneakyRacing
 
 		public virtual void hide()
 		{
-			Debug.Log("Panel:hide()");
+			//Debug.Log("Panel:hide()");
 
 			_elasticRotation.desirableRotation = 90.0f;
 		}

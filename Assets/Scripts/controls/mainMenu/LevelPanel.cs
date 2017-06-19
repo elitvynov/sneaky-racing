@@ -8,8 +8,7 @@ namespace sneakyRacing
 
 	public class LevelPanel : Panel
 	{
-		private Transform _competitorPanelTransform;
-		private Transform _competitorContentTransform;
+		private Transform _contentTransform;
 
 		private TrackItemRenderer[] _winnerItemRenderers;
 
@@ -29,7 +28,7 @@ namespace sneakyRacing
 
 		private void loadTrack(int index, string sceneName)
 		{
-			Debug.Log("loadRoom(): " + index + " / " + sceneName);
+			//Debug.Log("loadTrack(): " + index + " / " + sceneName);
 
 			if (ScreenOverlay.instance.onCompleteEvent == null)
 			{
@@ -46,53 +45,41 @@ namespace sneakyRacing
 		{
 			ScreenOverlay.instance.onCompleteEvent -= onScreenFadePlayComplete;
 
-			//Scene currentScene = SceneManager.GetActiveScene();
 			SceneManager.LoadScene(_currentSceneName);
 		}
 
 		private void updateTrackList(List<Track> trackList)
 		{
-			Debug.LogWarning("updateCompetitors: " + trackList.Count);
-
 			for (int i = 0; i < trackList.Count; i++)
 			{
 				GameObject itemRendererObject = Instantiate(_itemRendererPrefab.gameObject) as GameObject;
-				itemRendererObject.transform.SetParent(_competitorContentTransform, false);
+				itemRendererObject.transform.SetParent(_contentTransform, false);
 				itemRendererObject.SetActive(true);
 
 				TrackItemRenderer itemRenderer = itemRendererObject.GetComponent<TrackItemRenderer>();
 
 				Track track = trackList[i];
+				int trackIndex = i;
 
-				//SocialUserData socialUser = FBDataManager.instance.getUserByIdentifier(user.id);
-
-				if (track != null)
+				Button roomButton = itemRenderer.GetComponent<Button>();
+				roomButton.onClick.AddListener(() =>
 				{
-					Button roomButton = itemRenderer.GetComponent<Button>();
+					loadTrack(trackIndex, track.sceneName);
+				});
 
-					//Debug.Log("AddListener(): " + i + " / " + track.sceneName);
-
-					int trackIndex = i;
-
-					roomButton.onClick.AddListener(() =>
-					{
-						loadTrack(trackIndex, track.sceneName);
-					});
-
-					if (i < SettingManager.data.trackList.Count)
-					{
-						roomButton.interactable = true;
-						itemRenderer.stars = SettingManager.data.trackList[i].starCount;
-					}
-					else
-					{
-						roomButton.interactable = false;
-						itemRenderer.stars = 0;
-					}
-
-					itemRenderer.iconName = track.iconName;
-					itemRenderer.trackName = track.name;
+				if (i < SettingManager.data.trackList.Count)
+				{
+					roomButton.interactable = true;
+					itemRenderer.stars = SettingManager.data.trackList[i].starCount;
 				}
+				else
+				{
+					roomButton.interactable = false;
+					itemRenderer.stars = 0;
+				}
+
+				itemRenderer.iconName = track.iconName;
+				itemRenderer.trackName = track.name;
 			}
 
 			_inviteItemRenderer.SetAsLastSibling();
@@ -100,7 +87,7 @@ namespace sneakyRacing
 		
 		private void clearTrackList()
 		{
-			TrackItemRenderer[] competitorItemRenderers = _competitorContentTransform.GetComponentsInChildren<TrackItemRenderer>();
+			TrackItemRenderer[] competitorItemRenderers = _contentTransform.GetComponentsInChildren<TrackItemRenderer>();
 
 			for (int i = 0; i < competitorItemRenderers.Length; i++)
 			{
@@ -117,13 +104,11 @@ namespace sneakyRacing
 		{
 			base.Awake();
 
-			_competitorPanelTransform = transform.Find("ScrollRect");
-
-			_competitorContentTransform = _competitorPanelTransform.Find("Viewport/Content");
-			_itemRendererPrefab = _competitorContentTransform.Find("ItemRenderer");
+			_contentTransform = transform.Find("ScrollRect/Viewport/Content");
+			_itemRendererPrefab = _contentTransform.Find("ItemRenderer");
 			_itemRendererPrefab.gameObject.SetActive(false);
 
-			_inviteItemRenderer = _competitorContentTransform.Find("InfoItemRenderer");
+			_inviteItemRenderer = _contentTransform.Find("InfoItemRenderer");
 		}
 
 		private void OnEnable()

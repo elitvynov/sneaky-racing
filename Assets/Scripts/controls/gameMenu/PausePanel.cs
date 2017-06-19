@@ -49,15 +49,11 @@ namespace sneakyRacing
 				return;
 
 			pause = false;
-
-			//SoundPlayer.instance.play("ButtonClick");
 		}
 
 		public void pauseButtonClick()
 		{
 			pause = true;
-
-			//SoundPlayer.instance.play("ButtonClick");
 		}
 
 		public bool pause

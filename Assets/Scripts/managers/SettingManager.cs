@@ -21,7 +21,7 @@ namespace sneakyRacing
 
 		private SettingManager()
 		{
-			_tracks = DataManager.GetCompaings();
+			_tracks = DataManager.GetTracks();
 		}
 
 		public bool isInitialized = false;
@@ -91,13 +91,13 @@ namespace sneakyRacing
 		{
 			TrackData trackData = _data.trackList[_data.currentTrack];
 
-			Debug.LogWarning("trackData.bestTime = " + trackData.bestTime);
-			Debug.LogWarning("time = " + time);
+			Debug.Log("trackData.bestTime = " + trackData.bestTime);
+			Debug.Log("time = " + time);
 
 			if (trackData.bestTime == 0.0f || trackData.bestTime > time)
 				trackData.objectStateList = objectStateList;
 
-			Debug.LogWarning("_data.currentTrack = " + _data.currentTrack + ", trackData.objectStateList = " + trackData.objectStateList);
+			Debug.Log("_data.currentTrack = " + _data.currentTrack + ", trackData.objectStateList = " + trackData.objectStateList);
 		}
 
 		/// <summary>
@@ -150,17 +150,9 @@ namespace sneakyRacing
 	[System.Serializable]
 	public class SettingData
 	{
-		// settings' data
-		public string locale = "_en-en";
-		public bool gameRated = false;
-		public bool fxEnabled = false;
-		public bool soundEnabled = true;
-		public bool musicEnabled = true;
-
 		// player's data
 		public int coins = 0;
 		public int currentTrack = 0;
-		//public int availableTrack = 0;
 
 		// by default, we have 1 opened track
 		public List<TrackData> trackList = new List<TrackData>(new TrackData[] { new TrackData() });

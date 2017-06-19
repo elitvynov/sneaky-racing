@@ -76,43 +76,34 @@ namespace sneakyRacing
 
 		private void Update()
 		{
-			//if (Input.touchCount > 0)
+			for (int i = 0; i < Input.touches.Length; i++)
 			{
-				
+				Vector2 touchPosition = Input.touches[i].position;
 
-				for (int i = 0; i < Input.touches.Length; i++)
+				if (RectTransformUtility.RectangleContainsScreenPoint(_left, touchPosition))
 				{
-					Vector2 touchPosition = Input.touches[i].position;
+					//Debug.Log("LEFT");
 
-					if (RectTransformUtility.RectangleContainsScreenPoint(_left, touchPosition))
-					{
-						//Debug.Log("LEFT");
+					_input = Mathf.Clamp(_input - 4.0f * Time.deltaTime, -1, 0);
 
-						_input = Mathf.Clamp(_input - 4.0f * Time.deltaTime, -1, 0);
-
-						//_car.Move(-1.0f, 1.0f, 0.0f, 0.0f);
-					}
-					else
-					{
-						if (RectTransformUtility.RectangleContainsScreenPoint(_right, touchPosition))
-						{
-							//Debug.Log("RIGHT");
-
-							_input = Mathf.Clamp(_input + 4.0f * Time.deltaTime, 0, 1);
-
-							//_car.Move(1.0f, 1.0f, 0.0f, 0.0f);
-						}
-						else
-						{
-							_input = 0.0f;
-						}
-					}
+					//_car.Move(-1.0f, 1.0f, 0.0f, 0.0f);
 				}
 
-				Debug.Log("_input = " + _input);
+				if (RectTransformUtility.RectangleContainsScreenPoint(_right, touchPosition))
+				{
+					//Debug.Log("RIGHT");
 
-				_car.Move(_input, 1.0f, 0.0f, 0.0f);
+					_input = Mathf.Clamp(_input + 4.0f * Time.deltaTime, 0, 1);
+
+					//_car.Move(1.0f, 1.0f, 0.0f, 0.0f);
+				}
 			}
+
+			_input *= (5.0f * Time.deltaTime);
+
+			Debug.Log("_input = " + _input);
+
+			_car.Move(_input, 1.0f, 0.0f, 0.0f);
 		}
 	}
 }

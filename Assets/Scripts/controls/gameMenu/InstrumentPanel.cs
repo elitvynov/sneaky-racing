@@ -5,16 +5,6 @@ namespace sneakyRacing
 
 	public class InstrumentPanel : MonoBehaviour 
 	{
-		private Transform _pauseTransform;
-
-		public GameObject pauseButton
-		{
-			get
-			{
-				return _pauseTransform.gameObject;
-			}
-		}
-
 		private Text _checkpointText;
 
 		public int checkpoints
@@ -37,23 +27,8 @@ namespace sneakyRacing
 
 		private void Awake()
 		{
-			_pauseTransform = transform.Find("PauseButton");
-
 			_checkpointText = transform.Find("Checkpoints/Text").GetComponent<Text>();
 			_timeText = transform.Find("Time/Text").GetComponent<Text>();
-		}
-
-		private void Start()
-		{
-			//ammo = 0;
-			//distance = 0;
-			//energy = 0.0f;
-			//coins = SettingManager.data.coins;
-		}
-
-		private void Update()
-		{
-			
 		}
 	}
 }

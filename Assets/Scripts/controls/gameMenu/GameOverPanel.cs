@@ -4,10 +4,8 @@ namespace sneakyRacing
 	using UnityEngine.SceneManagement;
 
 	public class GameOverPanel : Panel 
-	{/*
-		private Transform _buttonsTransform;
-		private Transform _pauseTransform;
-		*/
+	{
+
 		public override void show()
 		{
 			AudioListener.volume = 0.0f;
@@ -47,8 +45,6 @@ namespace sneakyRacing
 			// load next track
 			if (SettingManager.data.currentTrack < SettingManager.data.trackList.Count)
 			{
-				//SettingManager.data.trackList.Add(new TrackData());
-
 				ScreenOverlay.instance.onCompleteEvent += onScreenFadeNextComplete;
 				ScreenOverlay.instance.fadeIn(0.5f);
 			}
@@ -103,14 +99,5 @@ namespace sneakyRacing
 
 			SceneManager.LoadScene("Menu");
 		}
-		/*
-		protected override void Awake()
-		{
-			base.Awake();
-
-			//_pauseTransform = transform.Find("PauseButton");
-			//_buttonPanelTransform = transform.Find("ButtonPanel");
-		}
-		*/
 	}
 }

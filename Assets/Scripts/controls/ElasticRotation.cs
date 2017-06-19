@@ -49,14 +49,7 @@
 
 		[SerializeField, Tooltip("Could be zero or negative(starting force).")]
 		private float _deltaRotation = 0.0f;
-		/*
-		[SerializeField]
-		private bool _xRotation = true;
-		[SerializeField]
-		private bool _yRotation = true;
-		[SerializeField]
-		private bool _zRotation = true;
-		*/
+
 		private void Start()
 		{
 			transform.localRotation = Quaternion.AngleAxis(_currentRotation, Vector3.up);

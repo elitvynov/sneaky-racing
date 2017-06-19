@@ -84,9 +84,6 @@ namespace sneakyRacing
 
 				_fadeIntensity = Mathf.Clamp01(_fadeIntensity + fadeStep);
 
-				//Console.trace("fadeStep = " + fadeStep + ", deltaTime = " + deltaTime + ", Time.deltaTime = " + Time.deltaTime);
-				//Console.trace("fadeIntensity = " + _fadeIntensity);
-
 				updateImage();
 
 				if (_fadeVolume)

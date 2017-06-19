@@ -8,10 +8,10 @@
 		[SerializeField]
 		private List<Track> _tracks;
 
-		public static List<Track> GetCompaings()
+		public static List<Track> GetTracks()
 		{
-			DataManager dm = Resources.Load<DataManager>("Tracks");
-			return dm._tracks;
+			DataManager dataManager = Resources.Load<DataManager>("Tracks");
+			return dataManager._tracks;
 		}
 	}
 
@@ -21,7 +21,5 @@
 		public string name;
 		public string sceneName;
 		public string iconName;
-
-		//public int cashPrize;
 	}
 }

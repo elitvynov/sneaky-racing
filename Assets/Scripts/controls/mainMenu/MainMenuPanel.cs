@@ -22,10 +22,5 @@ namespace sneakyRacing
 			(Level.instance.menu as MainMenu).mainMenuPanel.hide();
 			(Level.instance.menu as MainMenu).levelPanel.show();
 		}
-
-		private void Start()
-		{
-			ScreenOverlay.instance.fadeOut(0.5f);
-		}
 	}
 }

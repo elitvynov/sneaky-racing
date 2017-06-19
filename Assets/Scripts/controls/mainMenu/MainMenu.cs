@@ -39,12 +39,10 @@ namespace sneakyRacing
 			_mainMenuPanel = transform.Find("MenuPanel").GetComponent<MainMenuPanel>();
 			_levelPanel = transform.Find("LevelPanel").GetComponent<LevelPanel>();
 			_aboutPanel = transform.Find("AboutPanel").GetComponent<AboutPanel>();
-			//_instrumentPanel = transform.Find("InstrumentPanel").GetComponent<InstrumentPanel>();
 
 			_mainMenuPanel.gameObject.SetActive(true);
 			_levelPanel.gameObject.SetActive(false);
 			_aboutPanel.gameObject.SetActive(false);
-			//_resultTable.gameObject.SetActive(false);
 		}
 	}
 }

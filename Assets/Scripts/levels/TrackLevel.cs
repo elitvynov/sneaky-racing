@@ -33,11 +33,6 @@ namespace sneakyRacing
 				// pause game only before finish
 				if ((menu as GameMenu).gameOverPanel.visible == false)
 					(menu as GameMenu).pausePanel.pause = value;
-
-				//AudioListener.pause = value;
-				//AudioListener.volume = 0.0f;
-
-				Debug.LogWarning("AudioListener.volume = " + AudioListener.volume);
 			}
 		}
 
@@ -46,8 +41,6 @@ namespace sneakyRacing
 		public void gameOver()
 		{
 			Debug.LogWarning("gameOver()");
-
-			//(menu as GameMenu).pausePanel.visible = false;
 
 			_gameIsOver = true;
 
@@ -58,14 +51,12 @@ namespace sneakyRacing
 
 		private IEnumerator gameOverCoroutine()
 		{
-			Debug.LogWarning("IEnumerator gameOver()");
-
 			yield return new WaitForSeconds(1.5f);
 
 			GhostRecorder ghostRecorder = _player.transform.GetComponentInChildren<GhostRecorder>();
 			ghostRecorder.stop();
 
-			Debug.LogWarning("ghostRecorder.getReplay(): " + _time);
+			//Debug.LogWarning("ghostRecorder.getReplay(): " + _time);
 
 			SettingManager.instance.setReplay(ghostRecorder.getReplay(), _time);
 
