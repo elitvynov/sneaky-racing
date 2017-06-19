@@ -10,7 +10,7 @@ namespace sneakyRacing
 		*/
 		public override void show()
 		{
-			//Time.timeScale = 0.0f;
+			AudioListener.volume = 0.0f;
 
 			gameObject.SetActive(true);
 
@@ -24,12 +24,11 @@ namespace sneakyRacing
 				star.isActive = (i < trackData.starCount);
 			}
 
-			// make next track available to play
-			if (SettingManager.data.trackList.Count < SettingManager.tracks.Count - 1)
+			// if current track is last opened, and we still have unopened tracks - make next track available to play
+			if (SettingManager.data.currentTrack == SettingManager.data.trackList.Count - 1 &&
+				SettingManager.data.trackList.Count < SettingManager.tracks.Count)
 			{
 				SettingManager.data.trackList.Add(new TrackData());
-
-				SettingManager.data.currentTrack = SettingManager.data.trackList.Count - 1;
 			}
 		}
 		
@@ -43,11 +42,10 @@ namespace sneakyRacing
 			if (_inputInvalidator.invalidateEvent() == false)
 				return;
 
-			TrackData trackData = SettingManager.data.trackList[SettingManager.data.currentTrack];
+			SettingManager.data.currentTrack++;
 
 			// load next track
-			if (SettingManager.data.currentTrack < SettingManager.data.trackList.Count &&
-				trackData.isPlayed == false)
+			if (SettingManager.data.currentTrack < SettingManager.data.trackList.Count)
 			{
 				//SettingManager.data.trackList.Add(new TrackData());
 
@@ -57,6 +55,8 @@ namespace sneakyRacing
 			// player has finished all tracks - return to menu
 			else
 			{
+				SettingManager.data.currentTrack = 0;
+
 				ScreenOverlay.instance.onCompleteEvent += onScreenFadeQuitComplete;
 				ScreenOverlay.instance.fadeIn(0.5f);
 			}

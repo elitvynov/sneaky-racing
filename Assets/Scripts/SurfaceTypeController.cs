@@ -6,13 +6,14 @@
 
 	public class SurfaceTypeController : MonoBehaviour
 	{
+		/*
 		public enum SurfaceType
 		{
 			Mud,
 			Grass,
 			Sand,
 		};
-
+		*/
 		[SerializeField]
 		private CarController _car;
 
@@ -22,11 +23,11 @@
 		[SerializeField]
 		private WheelEffects _rightWheel;
 
-		private readonly float[] _tractionSurfaces = new float[3] { 0.25f, 0.65f, 0.95f };
+		private readonly float[] _tractionSurfaces = new float[3] { 0.25f, 0.65f, 0.85f };
 
 		private ParticleSystem[] _leftSurfaces = new ParticleSystem[3];
 		private ParticleSystem[] _rightSurfaces = new ParticleSystem[3];
-
+		/*
 		private SurfaceType _type = SurfaceType.Sand;
 
 		public SurfaceType type
@@ -36,7 +37,7 @@
 				return _type;
 			}
 		}
-
+		*/
 		private void Awake()
 		{
 			_leftSurfaces[0] = _leftWheel.transform.Find("ParticlesMud").GetComponent<ParticleSystem>();
@@ -75,7 +76,7 @@
 				{
 					if (color[i] == maxChannel)
 					{
-						_type = (SurfaceType)i;
+						//_type = (SurfaceType)i;
 
 						//Debug.Log("_type = " + _type);
 

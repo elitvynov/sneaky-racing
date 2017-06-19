@@ -13,7 +13,7 @@ namespace sneakyRacing
 		private RectTransform _left;
 		private RectTransform _right;
 
-		private CrossPlatformInputManager.VirtualAxis m_HorizontalVirtualAxis;
+		//private CrossPlatformInputManager.VirtualAxis m_HorizontalVirtualAxis;
 
 		private void Awake()
 		{
@@ -25,7 +25,7 @@ namespace sneakyRacing
 		{
 			gameObject.SetActive(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer);
 		}
-
+		/*
 		private void OnEnable()
 		{
 			m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis("Horizontal");
@@ -44,7 +44,8 @@ namespace sneakyRacing
 
 			m_HorizontalVirtualAxis.Update(value.x);
 		}
-
+		*/
+		/*
 		private void Update()
 		{
 			Debug.Log("Input.touchCount = " + Input.touchCount);
@@ -69,9 +70,11 @@ namespace sneakyRacing
 					//_car.Move(1.0f, 1.0f, 0.0f, 0.0f);
 				}
 			}
-		}
-		/*
-		private void FixedUpdate()
+		}*/
+
+		private float _input = 0.0f;
+
+		private void Update()
 		{
 			//if (Input.touchCount > 0)
 			{
@@ -85,18 +88,23 @@ namespace sneakyRacing
 					{
 						Debug.Log("LEFT");
 
-						_car.Move(-1.0f, 1.0f, 0.0f, 0.0f);
+						_input = Mathf.Clamp(_input - 4.0f * Time.deltaTime, -1, 1);
+
+						//_car.Move(-1.0f, 1.0f, 0.0f, 0.0f);
 					}
 
 					if (RectTransformUtility.RectangleContainsScreenPoint(_right, touchPosition))
 					{
 						Debug.Log("RIGHT");
 
+						_input = Mathf.Clamp(_input + 4.0f * Time.deltaTime, -1, 1);
+
 						_car.Move(1.0f, 1.0f, 0.0f, 0.0f);
 					}
 				}
+
+				_car.Move(_input, 1.0f, 0.0f, 0.0f);
 			}
 		}
-		*/
 	}
 }

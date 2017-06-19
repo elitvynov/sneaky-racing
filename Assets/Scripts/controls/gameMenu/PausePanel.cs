@@ -64,29 +64,20 @@ namespace sneakyRacing
 		{
 			set
 			{
-
-				//if (_quitConfirmation.isOpened || _retireConfirmation.isOpened)
-				//	return;
-
-				//_trafficLights.pause();
-
-				//Console.warning("pause = " + value);
-
 				if (value)
 				{
 					_pauseTransform.gameObject.SetActive(false);
 					_buttonPanelTransform.gameObject.SetActive(true);
 
+					AudioListener.volume = 0.0f;
 					Time.timeScale = 0.0f;
 				}
 				else
 				{
+					_pauseTransform.gameObject.SetActive(true);
 					_buttonPanelTransform.gameObject.SetActive(false);
 
-					//_trafficLights.onCompleteEvent += onPauseComplete;
-					//_trafficLights.activate();
-
-					_pauseTransform.gameObject.SetActive(true);
+					AudioListener.volume = 1.0f;
 					Time.timeScale = 1.0f;
 				}
 			}
@@ -98,14 +89,6 @@ namespace sneakyRacing
 
 			_pauseTransform = transform.Find("PauseButton");
 			_buttonPanelTransform = transform.Find("ButtonPanel");
-		}
-
-		private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.Escape))
-			{
-				(Level.instance as TrackLevel).pauseGame = true;
-			}
 		}
 	}
 }

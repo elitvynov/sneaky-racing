@@ -70,7 +70,7 @@ namespace sneakyRacing
 				{
 					Button roomButton = itemRenderer.GetComponent<Button>();
 
-					Debug.Log("AddListener(): " + i + " / " + track.sceneName);
+					//Debug.Log("AddListener(): " + i + " / " + track.sceneName);
 
 					int trackIndex = i;
 

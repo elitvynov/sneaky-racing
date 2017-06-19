@@ -34,11 +34,12 @@ namespace UnityStandardAssets.Vehicles.Car
             m_WheelCollider = GetComponent<WheelCollider>();
             m_AudioSource = GetComponent<AudioSource>();
             PlayingAudio = false;
-
+			/*
             if (skidTrailsDetachedParent == null)
             {
                 skidTrailsDetachedParent = new GameObject("Skid Trails - Detached").transform;
             }
+			*/
         }
 
 
@@ -75,9 +76,10 @@ namespace UnityStandardAssets.Vehicles.Car
         {
             skidding = true;
 
-			
+			if (m_SkidTrail != null)
+				yield return null;
 
-            m_SkidTrail = Instantiate(SkidTrailPrefab);
+			m_SkidTrail = Instantiate(SkidTrailPrefab);
 
 			//Debug.Log("StartSkidTrail(): " + m_SkidTrail);
 
@@ -96,9 +98,9 @@ namespace UnityStandardAssets.Vehicles.Car
             {
                 return;
             }
-            skidding = false;
-            m_SkidTrail.parent = skidTrailsDetachedParent;
-            Destroy(m_SkidTrail.gameObject, 10);
+            //skidding = false;
+           // m_SkidTrail.parent = skidTrailsDetachedParent;
+            //Destroy(m_SkidTrail.gameObject, 10);
         }
     }
 }

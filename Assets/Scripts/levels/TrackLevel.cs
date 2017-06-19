@@ -35,6 +35,9 @@ namespace sneakyRacing
 					(menu as GameMenu).pausePanel.pause = value;
 
 				//AudioListener.pause = value;
+				//AudioListener.volume = 0.0f;
+
+				Debug.LogWarning("AudioListener.volume = " + AudioListener.volume);
 			}
 		}
 

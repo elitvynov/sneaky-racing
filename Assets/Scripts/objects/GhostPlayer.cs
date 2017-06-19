@@ -6,12 +6,12 @@ namespace sneakyRacing
 	public class GhostPlayer : MonoBehaviour
 	{
 		private static List<Dictionary<string, ObjectState>> _objectStateList = new List<Dictionary<string, ObjectState>>();
-
+		/*
 		public static void setReplay(int trackIndex, List<Dictionary<string, ObjectState>> objectStateList)
 		{
 			_objectStateList = objectStateList;
 		}
-
+		*/
 		private int p0;
 		private int p1;
 
@@ -110,7 +110,9 @@ namespace sneakyRacing
 		{
 			TrackData trackData = SettingManager.data.trackList[SettingManager.data.currentTrack];
 
-			Debug.LogWarning("trackData.objectStateList = " + trackData.objectStateList);
+			SettingData data = SettingManager.data;
+
+			Debug.LogWarning("_data.currentTrack = " + SettingManager.data.currentTrack + ", trackData.objectStateList = " + trackData.objectStateList);
 			//Debug.LogWarning("trackData.objectStateList = " + trackData.objectStateList.Count);
 
 			if (trackData.objectStateList != null && trackData.objectStateList.Count > 0)

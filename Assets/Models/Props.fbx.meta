@@ -11,27 +11,32 @@ ModelImporter:
     100006: //RootNode
     100008: Ramp
     100010: Coin
+    100012: Boost
     400000: Checkpoint
     400002: CheckpointArea
     400004: Dice
     400006: //RootNode
     400008: Ramp
     400010: Coin
+    400012: Boost
     2300000: Checkpoint
     2300002: CheckpointArea
     2300004: Dice
     2300006: Ramp
     2300008: Coin
+    2300010: Boost
     3300000: Checkpoint
     3300002: CheckpointArea
     3300004: Dice
     3300006: Ramp
     3300008: Coin
+    3300010: Boost
     4300000: Checkpoint
     4300002: Dice
     4300004: Ramp
     4300006: CheckpointArea
     4300008: Coin
+    4300010: Boost
   materials:
     importMaterials: 0
     materialName: 0

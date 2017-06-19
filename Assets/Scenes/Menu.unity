@@ -1157,7 +1157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _elasticity: 0.7
   _strength: 0.1
-  _delay: 0.5
+  _delay: 0
   _currentRotation: 90
   _desirableRotation: 0
   _deltaRotation: 0
@@ -2189,7 +2189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _elasticity: 0.7
   _strength: 0.1
-  _delay: 0.5
+  _delay: 0
   _currentRotation: 90
   _desirableRotation: 0
   _deltaRotation: 0
@@ -3327,7 +3327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _elasticity: 0.7
   _strength: 0.1
-  _delay: 1
+  _delay: 0.5
   _currentRotation: 90
   _desirableRotation: 0
   _deltaRotation: 0

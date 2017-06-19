@@ -96,6 +96,8 @@ namespace sneakyRacing
 
 			if (trackData.bestTime == 0.0f || trackData.bestTime > time)
 				trackData.objectStateList = objectStateList;
+
+			Debug.LogWarning("_data.currentTrack = " + _data.currentTrack + ", trackData.objectStateList = " + trackData.objectStateList);
 		}
 
 		/// <summary>
