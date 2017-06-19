@@ -20,7 +20,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void Start()
         {
-            skidParticles = transform.root.GetComponentInChildren<ParticleSystem>();
+            skidParticles = transform.GetComponentInChildren<ParticleSystem>();
 
             if (skidParticles == null)
             {
@@ -28,7 +28,7 @@ namespace UnityStandardAssets.Vehicles.Car
             }
             else
             {
-                skidParticles.Stop();
+                skidParticles.Emit(0);
             }
 
             m_WheelCollider = GetComponent<WheelCollider>();
@@ -44,8 +44,16 @@ namespace UnityStandardAssets.Vehicles.Car
 
         public void EmitTyreSmoke()
         {
-            skidParticles.transform.position = transform.position - transform.up*m_WheelCollider.radius;
-            skidParticles.Emit(1);
+			if (skidParticles != null)
+			{
+				skidParticles.transform.position = transform.position - transform.up * m_WheelCollider.radius;
+				skidParticles.Emit(1);
+
+				Debug.LogWarning("EmitTyreSmoke(): " + skidParticles.name);
+			}
+
+			
+
             if (!skidding)
             {
                 StartCoroutine(StartSkidTrail());

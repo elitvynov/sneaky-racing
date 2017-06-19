@@ -26,7 +26,16 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_MaximumSteerAngle;
         [Range(0, 1)] [SerializeField] private float m_SteerHelper; // 0 is raw physics , 1 the car will grip in the direction it is facing
         [Range(0, 1)] [SerializeField] private float m_TractionControl; // 0 is no traction control, 1 is full interference
-        [SerializeField] private float m_FullTorqueOverAllWheels;
+
+		public float tractionControl
+		{
+			set
+			{
+				m_TractionControl = Mathf.Clamp01(value);
+			}
+		}
+
+		[SerializeField] private float m_FullTorqueOverAllWheels;
         [SerializeField] private float m_ReverseTorque;
         [SerializeField] private float m_MaxHandbrakeTorque;
         [SerializeField] private float m_Downforce = 100f;
@@ -125,8 +134,9 @@ namespace UnityStandardAssets.Vehicles.Car
             Revs = ULerp(revsRangeMin, revsRangeMax, m_GearFactor);
         }
 
+		private float _supressSteering = 0.0f;
 
-        public void Move(float steering, float accel, float footbrake, float handbrake)
+		public void Move(float steering, float accel, float footbrake, float handbrake)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -137,15 +147,23 @@ namespace UnityStandardAssets.Vehicles.Car
                 m_WheelMeshes[i].transform.rotation = quat;
             }
 
-            //clamp input values
-            steering = Mathf.Clamp(steering, -1, 1);
-            AccelInput = accel = Mathf.Clamp(accel, 0, 1);
+			// supress accel while steering
+			if (steering < -0.5f || steering > 0.5f)
+				_supressSteering = Mathf.Clamp(_supressSteering + 0.5f * Time.deltaTime, 0.0f, 0.5f);
+			else
+				_supressSteering = Mathf.Clamp(_supressSteering - 2.0f * Time.deltaTime, 0.0f, 0.5f);
+
+			//clamp input values
+			steering = Mathf.Clamp(steering, -1, 1);
+            AccelInput = accel = Mathf.Clamp(accel - _supressSteering, 0, 1);
             BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
             handbrake = Mathf.Clamp(handbrake, 0, 1);
 
-            //Set the steer on the front wheels.
-            //Assuming that wheels 0 and 1 are the front wheels.
-            m_SteerAngle = steering*m_MaximumSteerAngle;
+			//Debug.Log("accel = " + accel + ", _supressSteering = " + _supressSteering);
+
+			//Set the steer on the front wheels.
+			//Assuming that wheels 0 and 1 are the front wheels.
+			m_SteerAngle = steering*m_MaximumSteerAngle;
             m_WheelColliders[0].steerAngle = m_SteerAngle;
             m_WheelColliders[1].steerAngle = m_SteerAngle;
 

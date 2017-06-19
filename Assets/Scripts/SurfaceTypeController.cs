@@ -2,6 +2,8 @@
 {
 	using UnityEngine;
 
+	using UnityStandardAssets.Vehicles.Car;
+
 	public class SurfaceTypeController : MonoBehaviour
 	{
 		public enum SurfaceType
@@ -11,7 +13,40 @@
 			Sand,
 		};
 
+		[SerializeField]
+		private CarController _car;
+
+		[SerializeField]
+		private WheelEffects _leftWheel;
+
+		[SerializeField]
+		private WheelEffects _rightWheel;
+
+		private readonly float[] _tractionSurfaces = new float[3] { 0.05f, 0.5f, 1.0f };
+
+		private ParticleSystem[] _leftSurfaces = new ParticleSystem[3];
+		private ParticleSystem[] _rightSurfaces = new ParticleSystem[3];
+
 		private SurfaceType _type = SurfaceType.Sand;
+
+		public SurfaceType type
+		{
+			get
+			{
+				return _type;
+			}
+		}
+
+		private void Awake()
+		{
+			_leftSurfaces[0] = _leftWheel.transform.Find("ParticlesMud").GetComponent<ParticleSystem>();
+			_leftSurfaces[1] = _leftWheel.transform.Find("ParticlesGrass").GetComponent<ParticleSystem>();
+			_leftSurfaces[2] = _leftWheel.transform.Find("ParticlesSand").GetComponent<ParticleSystem>();
+
+			_rightSurfaces[0] = _rightWheel.transform.Find("ParticlesMud").GetComponent<ParticleSystem>();
+			_rightSurfaces[1] = _rightWheel.transform.Find("ParticlesGrass").GetComponent<ParticleSystem>();
+			_rightSurfaces[2] = _rightWheel.transform.Find("ParticlesSand").GetComponent<ParticleSystem>();
+		}
 
 		private void FixedUpdate()
 		{
@@ -42,17 +77,33 @@
 					{
 						_type = (SurfaceType)i;
 
+						Debug.Log("_type = " + _type);
+
+						if (_leftWheel.skidParticles != _leftSurfaces[i])
+						{
+							//_leftWheel.skidParticles.Emit(0);
+
+							_leftWheel.skidParticles = _leftSurfaces[i];
+							//_leftWheel.skidParticles.gameObject.SetActive(true);
+						}
+
+						if (_rightWheel.skidParticles != _rightSurfaces[i])
+						{
+							//_rightWheel.skidParticles.Emit(0);
+
+							_rightWheel.skidParticles = _rightSurfaces[i];
+							//_rightWheel.skidParticles.gameObject.SetActive(true);
+						}
+
+						_car.tractionControl = _tractionSurfaces[i];
+
+						//Debug.Log("_leftWheel.skidParticles = " + _leftWheel.skidParticles.name);
+						//Debug.Log("_rightWheel.skidParticles = " + _rightWheel.skidParticles.name);
+
 						break;
 					}
 				}
-
-				//Debug.Log("color = " + color + ", _type = " + _type);
 			}
-		}
-
-		private void OnDrawGizmos()
-		{
-			
 		}
 	}
 }

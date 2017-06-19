@@ -57,6 +57,8 @@
 
 		protected virtual void OnApplicationPause(bool pause)
 		{
+			AudioListener.pause = pause;
+
 			if (pause)
 			{
 				SettingManager.instance.flush();
