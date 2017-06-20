@@ -6,14 +6,13 @@
 
 	public class SurfaceTypeController : MonoBehaviour
 	{
-		/*
 		public enum SurfaceType
 		{
 			Mud,
 			Grass,
 			Sand,
 		};
-		*/
+		
 		[SerializeField]
 		private CarController _car;
 
@@ -78,7 +77,7 @@
 					{
 						//_type = (SurfaceType)i;
 
-						//Debug.Log("_type = " + _type);
+						Debug.Log("_type = " + (SurfaceType)i);
 
 						if (_leftWheel.skidParticles != _leftSurfaces[i])
 						{

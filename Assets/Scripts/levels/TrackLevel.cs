@@ -44,6 +44,7 @@ namespace sneakyRacing
 
 			_gameIsOver = true;
 
+			(menu as GameMenu).touchControl.gameObject.SetActive(false);
 			_player.GetComponent<CarUserControl>().enabled = false;
 
 			StartCoroutine(gameOverCoroutine());

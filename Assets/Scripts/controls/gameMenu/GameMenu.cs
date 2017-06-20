@@ -34,11 +34,22 @@ namespace sneakyRacing
 			}
 		}
 
+		private TouchControl _touchControl;
+
+		public TouchControl touchControl
+		{
+			get
+			{
+				return _touchControl;
+			}
+		}
+
 		private void Awake()
 		{
 			_pausePanel = transform.Find("PausePanel").GetComponent<PausePanel>();
 			_gameOverPanel = transform.Find("GameOverPanel").GetComponent<GameOverPanel>();
 			_instrumentPanel = transform.Find("InstrumentPanel").GetComponent<InstrumentPanel>();
+			_touchControl = transform.Find("TouchControl").GetComponent<TouchControl>();
 
 			_pausePanel.gameObject.SetActive(true);
 			_gameOverPanel.gameObject.SetActive(false);
