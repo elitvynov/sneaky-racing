@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 38066a8507881ca459ca3f691174f85f
-timeCreated: 1497552438
+guid: 70167f8ef62dbc84baf24566f3cdf83d
+timeCreated: 1497943801
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -41,7 +41,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaUsage: 1
+  alphaUsage: 0
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 0
@@ -51,7 +51,7 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -59,7 +59,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 256
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -69,15 +69,15 @@ TextureImporter:
   - buildTarget: iPhone
     maxTextureSize: 256
     textureFormat: 7
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
   - buildTarget: tvOS
-    maxTextureSize: 256
+    maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -85,15 +85,15 @@ TextureImporter:
   - buildTarget: Android
     maxTextureSize: 256
     textureFormat: 7
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
   - buildTarget: WebGL
-    maxTextureSize: 256
+    maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0

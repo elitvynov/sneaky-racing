@@ -8,9 +8,9 @@
 	{
 		public enum SurfaceType
 		{
-			Mud,
-			Grass,
 			Sand,
+			Grass,
+			Mud,
 		};
 		
 		[SerializeField]
@@ -22,7 +22,12 @@
 		[SerializeField]
 		private WheelEffects _rightWheel;
 
-		private readonly float[] _tractionSurfaces = new float[3] { 0.25f, 0.65f, 0.85f };
+		private readonly float[] _tractionSurfaces = new float[3]
+		{
+			0.85f,	// sand
+			0.55f,	// grass
+			0.25f	// mud
+		};
 
 		private ParticleSystem[] _leftSurfaces = new ParticleSystem[3];
 		private ParticleSystem[] _rightSurfaces = new ParticleSystem[3];
@@ -39,13 +44,13 @@
 		*/
 		private void Awake()
 		{
-			_leftSurfaces[0] = _leftWheel.transform.Find("ParticlesMud").GetComponent<ParticleSystem>();
+			_leftSurfaces[0] = _leftWheel.transform.Find("ParticlesSand").GetComponent<ParticleSystem>();
 			_leftSurfaces[1] = _leftWheel.transform.Find("ParticlesGrass").GetComponent<ParticleSystem>();
-			_leftSurfaces[2] = _leftWheel.transform.Find("ParticlesSand").GetComponent<ParticleSystem>();
+			_leftSurfaces[2] = _leftWheel.transform.Find("ParticlesMud").GetComponent<ParticleSystem>();
 
-			_rightSurfaces[0] = _rightWheel.transform.Find("ParticlesMud").GetComponent<ParticleSystem>();
+			_rightSurfaces[0] = _rightWheel.transform.Find("ParticlesSand").GetComponent<ParticleSystem>();
 			_rightSurfaces[1] = _rightWheel.transform.Find("ParticlesGrass").GetComponent<ParticleSystem>();
-			_rightSurfaces[2] = _rightWheel.transform.Find("ParticlesSand").GetComponent<ParticleSystem>();
+			_rightSurfaces[2] = _rightWheel.transform.Find("ParticlesMud").GetComponent<ParticleSystem>();
 		}
 
 		private void FixedUpdate()
@@ -77,7 +82,7 @@
 					{
 						//_type = (SurfaceType)i;
 
-						Debug.Log("_type = " + (SurfaceType)i);
+						//Debug.Log("_type = " + (SurfaceType)i);
 
 						if (_leftWheel.skidParticles != _leftSurfaces[i])
 						{
