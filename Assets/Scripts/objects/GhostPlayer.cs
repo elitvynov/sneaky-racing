@@ -65,29 +65,7 @@ namespace sneakyRacing
 					Debug.LogWarning("Cannot find key " + pair.Key);
 			}
 		}
-
-		private float _frame = 0.0f;
-
-		public float frame
-		{
-			get
-			{
-				return _frame;
-			}
-			set
-			{
-				_frame = value;
-
-				//int count = ;
-				int index = Mathf.RoundToInt(value);
-
-				//Console.trace("value=" + value + ", index=" + Mathf.RoundToInt(index) + ", Count=" + _objectStateList.Count);
-
-				if (index < _objectStateList.Count - 1)
-					restoreState(index);
-			}
-		}
-
+		
 		private void restoreState(int index)
 		{
 			Dictionary<string, ObjectState> stateDict = _objectStateList[index];
